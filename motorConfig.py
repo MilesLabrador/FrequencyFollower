@@ -7,12 +7,13 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 
 # This command clears the configuration from the GPIO interface
-GPIO.cleanup()
+#GPIO.cleanup()
 
 class Motor():
     def __init__(self, forwards_pin, backwards_pin):
         """Initialize pins for forwards and backwards GPIO pin to
         control which input powers the DC motor"""
+        GPIO.setmode(GPIO.BOARD)
         self.pinF = forwards_pin
         self.pinB = backwards_pin
         GPIO.setup(self.pinF, GPIO.OUT)
@@ -20,12 +21,21 @@ class Motor():
 
     def forwards(self):
         """Make motor move backwards by sending high signal to forwards pin"""
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.pinF, GPIO.OUT)
+        GPIO.setup(self.pinB, GPIO.OUT)
         GPIO.output(self.pinF, GPIO.HIGH)
     def backwards(self):
         """Make motor move backwards by sending high signal to backwards pin"""
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.pinF, GPIO.OUT)
+        GPIO.setup(self.pinB, GPIO.OUT)
         GPIO.output(self.pinB, GPIO.HIGH)
     def stop(self):
         """Stop motor by outputting low to both pins"""
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.pinF, GPIO.OUT)
+        GPIO.setup(self.pinB, GPIO.OUT)
         GPIO.output(self.pinF, GPIO.LOW)
         GPIO.output(self.pinB, GPIO.LOW)
 
